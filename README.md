@@ -1,5 +1,5 @@
 <p align="center">
-   <img src="https://raw.githubusercontent.com/juneHQ/houseplant/refs/heads/master/houseplant.png" width="300">
+   <img src="./houseplant.png" width="300">
 </p>
 
 # Houseplant: Database Migrations for ClickHouse
@@ -60,11 +60,14 @@ $ pip install houseplant
 Houseplant uses the following environment variables to connect to your ClickHouse instance:
 
 - `HOUSEPLANT_ENV`: The current environment
+- `HOUSEPLANT_DIR`: The directory where migrations are stored (default: "ch")
+- `HOUSEPLANT_SCHEMA_SNAPSHOT_FILE`: The file name for the schema snapshot (default: "schema.sql")
 - `CLICKHOUSE_HOST`: Host address of your ClickHouse server (default: "localhost")
 - `CLICKHOUSE_PORT`: Port number for ClickHouse (default: 9000)
 - `CLICKHOUSE_DB`: Database name (default: "development")
 - `CLICKHOUSE_USER`: Username for authentication (default: "default")
 - `CLICKHOUSE_PASSWORD`: Password for authentication (default: "")
+- `CLICKHOUSE_CLUSTER`: Cluster name (default: not set, don't use ON CLUSTER queries)
 
 ## Contributing
 

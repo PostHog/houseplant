@@ -1,6 +1,9 @@
 import os
 
-MIGRATIONS_DIR = "ch/migrations"
+HOUSEPLANT_DIR = os.getenv("HOUSEPLANT_DIR", "ch")
+HOUSEPLANT_SCHEMA_SNAPSHOT_FILE = os.getenv("HOUSEPLANT_SCHEMA_SNAPSHOT_FILE", "schema.sql")
+
+MIGRATIONS_DIR = os.path.join(HOUSEPLANT_DIR, "migrations")
 
 
 def get_migration_files():
