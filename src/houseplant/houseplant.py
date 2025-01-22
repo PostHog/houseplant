@@ -243,7 +243,7 @@ class Houseplant:
             timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
 
             migration_name = name.replace(" ", "_").replace("-", "_").lower()
-            migration_file = f"ch/migrations/{timestamp}_{migration_name}.yml"
+            migration_file = f"{MIGRATIONS_DIR}/{timestamp}_{migration_name}.yml"
 
             with open(migration_file, "w") as f:
                 f.write(f"""version: "{timestamp}"
@@ -312,7 +312,7 @@ production:
             if not matching_file:
                 continue
 
-            migration_file = f"ch/migrations/{matching_file}"
+            migration_file = f"{MIGRATIONS_DIR}/{matching_file}"
             with open(migration_file) as f:
                 migration_data = yaml.safe_load(f)
 
