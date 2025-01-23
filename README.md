@@ -1,6 +1,5 @@
 <p align="center">
-   <img src="./houseplant.png" width="300">
-</p>
+   <img src="https://raw.githubusercontent.com/juneHQ/houseplant/refs/heads/master/houseplant.png" width="300">
 
 # Houseplant: Database Migrations for ClickHouse
 
