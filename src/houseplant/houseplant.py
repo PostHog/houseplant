@@ -8,7 +8,7 @@ from rich.console import Console
 from rich.table import Table
 
 from .clickhouse_client import ClickHouseClient
-from .utils import MIGRATIONS_DIR, get_migration_files
+from .utils import HOUSEPLANT_SCHEMA_SNAPSHOT_FILE, HOUSEPLANT_DIR, MIGRATIONS_DIR, get_migration_files
 
 
 class Houseplant:
@@ -30,8 +30,8 @@ class Houseplant:
     def init(self):
         """Initialize a new houseplant project."""
         with self.console.status("[bold green]Initializing new houseplant project..."):
-            os.makedirs("ch/migrations", exist_ok=True)
-            open("ch/schema.sql", "a").close()
+            os.makedirs(MIGRATIONS_DIR, exist_ok=True)
+            open(f"{HOUSEPLANT_DIR}/{HOUSEPLANT_SCHEMA_SNAPSHOT_FILE}", "a").close()
 
             self.db.init_migrations_table()
 
@@ -243,7 +243,7 @@ class Houseplant:
             timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
 
             migration_name = name.replace(" ", "_").replace("-", "_").lower()
-            migration_file = f"ch/migrations/{timestamp}_{migration_name}.yml"
+            migration_file = f"{MIGRATIONS_DIR}/{timestamp}_{migration_name}.yml"
 
             with open(migration_file, "w") as f:
                 f.write(f"""version: "{timestamp}"
@@ -312,7 +312,7 @@ production:
             if not matching_file:
                 continue
 
-            migration_file = f"ch/migrations/{matching_file}"
+            migration_file = f"{MIGRATIONS_DIR}/{matching_file}"
             with open(migration_file) as f:
                 migration_data = yaml.safe_load(f)
 
@@ -355,7 +355,7 @@ production:
                     processed_tables.add(table_name)
 
         # Write schema file
-        with open("ch/schema.sql", "w") as f:
+        with open(f"{HOUSEPLANT_DIR}/{HOUSEPLANT_SCHEMA_SNAPSHOT_FILE}", "w") as f:
             f.write(f"-- version: {latest_version}\n\n")
             if table_statements:
                 f.write("-- TABLES\n\n")

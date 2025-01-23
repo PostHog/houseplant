@@ -20,9 +20,10 @@ app = typer.Typer(
 )
 
 
-def get_houseplant() -> Houseplant:
+def get_houseplant(init: bool = False) -> Houseplant:
     houseplant = Houseplant()
-    houseplant._check_migrations_dir()
+    if not init:
+        houseplant._check_migrations_dir()
     houseplant.db._check_clickhouse_connection()
     return houseplant
 
@@ -51,7 +52,7 @@ def common(
 @app.command()
 def init():
     """Initialize a new houseplant project."""
-    hp = get_houseplant()
+    hp = get_houseplant(init=True)
     hp.init()
 
 

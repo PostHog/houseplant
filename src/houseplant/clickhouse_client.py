@@ -1,6 +1,7 @@
 """ClickHouse database operations module."""
 
 import os
+import sys
 
 from clickhouse_driver import Client
 from clickhouse_driver.errors import NetworkError, ServerException
@@ -114,7 +115,7 @@ class ClickHouseClient:
             ORDER BY (version)
         """
 
-        cluster_clause = "ON CLUSTER '{cluster}'" if self.cluster is not None else ""
+        cluster_clause = f"ON CLUSTER '{self.cluster}'" if self.cluster else ""
         engine = (
             "ReplicatedReplacingMergeTree(created_at)"
             if self.cluster is not None

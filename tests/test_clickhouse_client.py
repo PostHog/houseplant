@@ -146,7 +146,7 @@ def test_migrations_table_structure_with_cluster(ch_client, monkeypatch):
 
     create_statement = ch_client.init_migrations_table_query()
 
-    assert "ON CLUSTER '{cluster}'" in create_statement
+    assert "ON CLUSTER 'test_cluster'" in create_statement
     assert "ENGINE = ReplicatedReplacingMergeTree" in create_statement
 
 
@@ -154,7 +154,7 @@ def test_migrations_table_structure_without_cluster(ch_client):
     """Test that migrations table is created with correct structure when using cluster."""
     create_statement = ch_client.init_migrations_table_query()
 
-    assert "ON CLUSTER '{cluster}'" not in create_statement
+    assert "ON CLUSTER" not in create_statement
     assert "ENGINE = ReplacingMergeTree" in create_statement
 
 

@@ -3,6 +3,7 @@ import os
 import pytest
 
 from houseplant.houseplant import Houseplant
+from houseplant.utils import MIGRATIONS_DIR
 
 
 @pytest.fixture
@@ -13,7 +14,7 @@ def houseplant():
 @pytest.fixture
 def test_migration(tmp_path):
     # Set up test environment
-    migrations_dir = tmp_path / "ch/migrations"
+    migrations_dir = tmp_path / MIGRATIONS_DIR
     migrations_dir.mkdir(parents=True)
     migration_file = migrations_dir / "20240101000000_test_migration.yml"
 
@@ -53,7 +54,7 @@ production:
 @pytest.fixture
 def test_migration_with_table(tmp_path):
     # Set up test environment
-    migrations_dir = tmp_path / "ch/migrations"
+    migrations_dir = tmp_path / MIGRATIONS_DIR
     migrations_dir.mkdir(parents=True)
     migration_file = migrations_dir / "20240101000000_test_settings.yml"
 
@@ -99,7 +100,7 @@ production:
 @pytest.fixture
 def test_migration_with_view(tmp_path):
     # Set up test environment
-    migrations_dir = tmp_path / "ch/migrations"
+    migrations_dir = tmp_path / MIGRATIONS_DIR
     migrations_dir.mkdir(parents=True)
     migration_file = migrations_dir / "20240101000000_test_view.yml"
 
@@ -148,7 +149,7 @@ production:
 @pytest.fixture
 def duplicate_migrations(tmp_path):
     # Set up test environment
-    migrations_dir = tmp_path / "ch/migrations"
+    migrations_dir = tmp_path / MIGRATIONS_DIR
     migrations_dir.mkdir(parents=True)
 
     # Create two migrations that modify the same table
@@ -206,7 +207,7 @@ production:
 
 @pytest.fixture
 def migration_with_settings(tmp_path):
-    migrations_dir = tmp_path / "ch/migrations"
+    migrations_dir = tmp_path / MIGRATIONS_DIR
     migrations_dir.mkdir(parents=True)
     migration_file = migrations_dir / "20240101000000_test_migration_with_settings.yml"
 
@@ -503,7 +504,7 @@ def test_migrate_up_missing_table_field(houseplant, tmp_path, mocker):
     )
 
     # Set up test environment with invalid migration
-    migrations_dir = tmp_path / "ch/migrations"
+    migrations_dir = tmp_path / MIGRATIONS_DIR
     migrations_dir.mkdir(parents=True)
     migration_file = migrations_dir / "20240101000000_invalid_migration.yml"
 
@@ -565,7 +566,7 @@ def test_migrate_down_missing_migration_file(houseplant, mocker):
 
 def test_migrate_down_missing_table_field(houseplant, tmp_path, mocker):
     # Set up test environment with invalid migration
-    migrations_dir = tmp_path / "ch/migrations"
+    migrations_dir = tmp_path / MIGRATIONS_DIR
     migrations_dir.mkdir(parents=True)
     migration_file = migrations_dir / "20240101000000_invalid_migration.yml"
 
