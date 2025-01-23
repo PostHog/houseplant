@@ -355,7 +355,7 @@ production:
                     processed_tables.add(table_name)
 
         # Write schema file
-        with open("ch/schema.sql", "w") as f:
+        with open(f"{HOUSEPLANT_DIR}/{HOUSEPLANT_SCHEMA_SNAPSHOT_FILE}", "w") as f:
             f.write(f"-- version: {latest_version}\n\n")
             if table_statements:
                 f.write("-- TABLES\n\n")
